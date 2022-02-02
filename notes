@@ -1,0 +1,63 @@
+1 - We use Curses in order to complete this project - to do this you'll go to cmd - pip install windows-curses
+	We use the Wrapper -inside the curses library - to control our terminal
+
+2 - define our main method - stdscr = standard screen normally your terminal screen
+
+3 - In order to display changes made on the screen you first need to clear the screen - stdscr.clear()
+	After you clear you then need to refresh - stdscr.refresh() - you need to clear and refresh constantly in 
+	order for screen to show correctly. without clearing and refreshing - previous things on the screen will remain 
+	visible and begin to overlap
+
+4 - stdscr.getkey() - this waits for the user to press a key before the program ends. When writing this we don't have the game created yet
+	so we only have a program that opens and says 'hello world' and when the user presses a button the program ends. We're also setting up
+	a variable 'key' to store and later print out the key pressed by the user
+
+5 - Here we're coloring the text - what we do with this line of code is we say the first color Green will sit on a background color Blue
+	and also they are represented by the ID 1. So when we call this ID 1 in the future it will pull this color combo
+	In order to reference this pair in this example we are adding the color ID number to the end of our ADDSTRING function 
+	the code looks like stdscr.addstr("Hello World!", curses.color_pair(1)). This will use that color pair at ID 1 for the string
+
+6 - Here we're making a function so that it prompt the user to say something like "are you ready to play this game" and when the user gives a certain input the game loop begins
+	We use \n in the second string to cause that string to start on the next line below the first string
+
+
+7 - Here we're setting up a function called wpm_test. Inside here we print out what our "target" text is going to be and get the user to start typing
+	We put target_text inside the addstr method because the variable holds the keys that were pressed
+
+8 - ORD means the ordinal value of a key. It's the numerical value of your key on a keyboard. ESC is represented by the number 27
+
+9 - Enumerate gives us the element from the current text and the index from the list. This display_text function is going to allow us to overlay the letters
+	being typed over our string of chars the user is expected to type
+
+10- Here we are adding the correct_char variable from the target variable and determining if thats the key pressed and it matched the target
+	we used color_pair(1). However, if the user does not select the correct key we use color_pair(2)
+
+11- Here we're setting up a timer for the game so that we can determine Words Per Minute. We import time and set start_time to time.time(). This will pull the exact time
+	everytime while the While loop runs. The code wpm = len(current_text) / (time_elapsed / 60) is how we determine the word per minute
+
+12 -stdscr.nodelay(True) is making is so that below in the While loop where key = stdscr.getkey() <- this is basically pausing the game waiting for the user to
+	press a key. However the nodelay(True) basically by-passes this getkey() function to allow our WPM to count down when the user is no longer typing
+
+13 -This try loop is having the program go through the While loop. When it gets to the try - its going to try to getkey() from the user and if it does - great. 
+	However, if it doesn't get the input and "crashes" it sees that as an exception and here we tell the program to continue which will allow the program
+	to continue its path as normal.
+
+14 -ENDING THE GAME - we need to check to see if the user has typed all the letters correctly. To do so we need to use the "".join() function. This function joins
+	the list passed into it (in this case its current_text) and puts it into the string created before the .join. If you want the characters in the string to be seperated 
+	by a space or - or anything you'd just initialize it at the .join like this. "-".join(current_text)
+	We usse stdscr.nodelay(False) because we want to show something on the screen and wait for the user to continue. If we dont add this the code won't wait for an input because
+	nodelay = True. 
+
+15- We are creating a while loop here so if the user wants to continue it will run the program over again.
+
+
+16- Here we are creating a function to load in our text.txt file. with open("text.txt", "r") as f- this is saying open this file and READ.
+	If we wanted to here we you write to the file by changing it to a "w". This will be very useful to create a file and auto write to it.
+	with allows us to know that the file will be closed after it has been opened and read. with is a context manager. 
+	We store the file in variable f. this way we can use f to read each line in the code below lines = f.readlines(). This gets a list of all the lines in this file.
+	Then we want to randomly select one of these lines and return it. We use the .strip() function to remove the invisible \n characters at the end of the strings 
+	taken from the file. Officially .strip() gets rid of any leading or trailing any white space characters.
+
+
+
+

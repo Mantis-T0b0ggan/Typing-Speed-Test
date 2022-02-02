@@ -1,0 +1,8 @@
+Hello,
+
+The program here is a simple program to have the user type a set of text strings as fast as possible
+If the user matches the key pressed with the char displayed the chars display green. 
+If the user doesn't press the correct key the chars display in red. 
+The user will complete the "round" once they type the given string of text correctly
+
+This code was assisted by following video https://www.youtube.com/watch?v=NQ5i1kJAA6Y - Thanks Tim!
